@@ -2,15 +2,16 @@ package game.commands;
 
 import game.Core;
 import game.commands.Command;
+import model.MyColor;
 
 public class ColorCommand implements Command {
-    final private String colour;
+    final private MyColor colour;
 
-    public ColorCommand(String colour) {
+    public ColorCommand(MyColor colour) {
         this.colour = colour;
     }
 
-    private void setColour(String colour, Core core) {
+    private void setColour(MyColor colour, Core core) {
         core.getElf().getPen().setColour(colour);
     }
 

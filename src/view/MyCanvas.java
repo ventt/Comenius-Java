@@ -47,12 +47,12 @@ public class MyCanvas extends Canvas {
 
 
 
-            g2.drawImage(imgElf,convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getX(),convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getY(), this);
+        g2.drawImage(imgElf,convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getX(),convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getY(), this);
 
 
 
         for (Line line : list) {
-            g2.setColor(line.getColour().equals("RED") ? Color.RED : Color.BLUE); //egyelőre
+            g2.setColor(line.getColour().getColor()); //egyelőre
             g2.setStroke(new BasicStroke(line.getThickness()));
             g2.draw(new Line2D.Double(convertPosition(line.getStartPos(), this.getWidth(), this.getHeight()).getX(),
                     convertPosition(line.getStartPos(), this.getWidth(), this.getHeight()).getY(),

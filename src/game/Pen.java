@@ -1,5 +1,7 @@
 package game;
 
+import model.MyColor;
+
 public class Pen {
     //singleton
     private static final Pen instance = new Pen();
@@ -7,7 +9,7 @@ public class Pen {
     private Pen() {}
 
     private boolean isDrawing = false;
-    private String colour = "Black";
+    private MyColor colour = new MyColor();
     private int penThickness = 1;
 
     public static Pen getInstance() {
@@ -23,14 +25,14 @@ public class Pen {
         isDrawing = drawing;
     }
 
-    public void setColour(String colour){
+    public void setColour(MyColor colour){
         this.colour = colour;
     }
     public void setPenThickness(int penThickness){
         this.penThickness = penThickness;
     }
 
-    public String getColour() {
+    public MyColor getColour() {
         return colour;
     }
 
@@ -41,7 +43,7 @@ public class Pen {
     }
     public void penSetDefault(){
         isDrawing = false;
-        colour = "Black";
+        colour = new MyColor();
         penThickness = 1;
     }
     @Override

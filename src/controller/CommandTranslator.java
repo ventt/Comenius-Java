@@ -3,8 +3,7 @@ package controller;
 import game.Core;
 import game.Orientation;
 import game.commands.*;
-
-import java.util.Locale;
+import model.MyColor;
 
 public class CommandTranslator {
     public void translate(String input){
@@ -15,7 +14,9 @@ public class CommandTranslator {
                 command = new MoveCommand(Integer.decode(s[1].toLowerCase()));
                 break;
             case "color":
-                command = new ColorCommand(s[1].toLowerCase());
+                MyColor color = new MyColor();
+                color.setColor(s[1].toLowerCase());
+                command = new ColorCommand(color);
                 break;
             case "pen":
                 if("down".equals(s[1].toLowerCase())){
@@ -46,7 +47,8 @@ public class CommandTranslator {
             case "clear":
                 command = new ClearCommand();
                 break;
-            default:
+
+                default:
                 System.out.println("Not a valid command");
                 break;
         }
