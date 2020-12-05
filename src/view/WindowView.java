@@ -2,6 +2,7 @@ package view;
 
 import controller.CommandTranslator;
 import game.Core;
+import game.commands.Command;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,13 +23,13 @@ public class WindowView {
 
 
     private TextField commmandPrompt;
-    private JList<String> commandList;
+    private JList<Command> commandList;
     private JPanel canvasPanel;
     private TextField scaleText;
     private JPanel leftPanel;
-    public WindowView(MyCanvas canvas){
+    public WindowView(MyCanvas canvas, JList<Command> commandList){
         this.canvas = canvas;
-        commandList = new JList(Core.getInstance().getCommandsListString().toArray());
+        this.commandList = commandList;
     }
 
     public void createWindow(){
@@ -46,27 +47,28 @@ public class WindowView {
 
         canvasPanel = new JPanel();
 
-        canvasPanel.setSize(new Dimension(800,800));
-        canvasPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK,3,true));
+        canvasPanel.setSize(new Dimension(1600,920));
+        canvasPanel.setMaximumSize(new Dimension(1600,960));
+        canvasPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK,2,true));
+        canvasPanel.setAutoscrolls(true);
         canvas.setSize(canvasPanel.getSize());
-        canvasPanel.add(canvas);
+        canvasPanel.add(canvas, BorderLayout.CENTER);
         canvas.setBackground(Color.LIGHT_GRAY);
 
         leftPanel = new JPanel();
-
-
-
-
-        leftPanel.add(commandList);
+        leftPanel.setSize(new Dimension(600, frame.getHeight()));
+        leftPanel.add(commandList,BorderLayout.CENTER);
 
 
         frame.add(canvasPanel, BorderLayout.WEST);
         frame.add(leftPanel, BorderLayout.EAST);
-        frame.add(commmandPrompt, BorderLayout.SOUTH);
-        frame.pack();
-        frame.setMaximumSize(new Dimension(1920,1080));
 
-        frame.setResizable(false);
+        frame.add(commmandPrompt, BorderLayout.SOUTH);
+        frame.setPreferredSize(new Dimension(1920,1080));
+        frame.pack();
+
+
+        frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 

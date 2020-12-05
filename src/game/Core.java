@@ -1,5 +1,6 @@
 package game;
 
+import game.commands.ClearCommand;
 import game.commands.Command;
 
 import java.util.ArrayList;
@@ -29,28 +30,34 @@ public class Core {
     public List<Line> getList(){
         return draws;
     }
+
+    public ArrayList<Command> getCommands() {
+        return commands;
+    }
+
     public List<String> getCommandsListString(){
         List<String> out = new ArrayList<>();
-        for (int i = 0; i < commands.size(); i++){
-            out.add(commands.get(i).toString());
+        for(Command command : commands) {
+            out.add(command.toString());
         }
         return out;
     }
-    /*public void undo(){ //Ezen még gondolkozni kell ;)
-        //visszalépésnél leellenörizzük hogy az utolsó parancs move volt-e és lent van-e a toll, mert ebben az esetben az utolsó rajzot is törölni kell.
-        if(MoveCommand.class.equals(commands.get(commands.size()-1)) && elf.getPen().isDrawing()){
-            draws.remove(draws.size()-1);
-            commands.remove(commands.size()-1);
-        }else{
-            commands.remove(commands.size()-1);
-        }
-    }*/
+    public void undo(){ //Ezen még gondolkozni kell ;)
+        commands.remove(commands.size()-2);
+        commands.remove(commands.size()-1);
+    }
+    public void clear(){
+        setDefault();
+        draws.clear();
+        commands = new ArrayList<Command>();
+
+    }
 
     // Commands
     public void doCommands(){
         setDefault();
-            for (int i = 0; i < commands.size(); i++){
-                commands.get(i).method(this);
+            for (Command command: commands){
+                command.method(this);
                 System.out.println(elf.toString());
         }
             System.out.println();
