@@ -30,12 +30,12 @@ public class MoveCommand implements Command {
 
     private void Move(int steps, Core core) {
         if (!core.getElf().getPen().isDrawing()) {
-            core.getElf().setCurrent(movement(core.getElf().getPosition(), steps, core.getElf().getOrientation()));
+            core.getElf().setPosition(movement(core.getElf().getPosition(), steps, core.getElf().getOrientation()));
 
         } else {
             Position newPos = movement(core.getElf().getPosition(), steps, core.getElf().getOrientation());
             Line obj = new Line(core.getElf().getPosition(), newPos, core.getElf().getPen().getColor(), core.getElf().getPen().getPenThickness()); /// !!!
-            core.getElf().setCurrent(newPos);
+            core.getElf().setPosition(newPos);
             core.getDraws().add(obj);
         }
     }

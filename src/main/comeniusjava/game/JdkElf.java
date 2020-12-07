@@ -3,7 +3,7 @@ package comeniusjava.game;
 public class JdkElf {
     private final Position home = new Position(0, 0);
     private final Pen pen = new Pen();
-    private Position current = home;
+    private Position position = home;
     private Rotation rotation = Rotation.FORWARD;
 
     JdkElf() {
@@ -23,16 +23,16 @@ public class JdkElf {
     }
 
     public Position getPosition() {
-        return current;
+        return position;
     }
 
     //pozicio
-    public void setCurrent(Position current) {
-        this.current = current;
+    public void setPosition(Position current) {
+        this.position = current;
     }
 
     public void setHome() {
-        current = home;
+        position = home;
     }
 
     public void setElfDefault() {
@@ -44,8 +44,8 @@ public class JdkElf {
     @Override
     public String toString() {
         return "JdkElf{" +
-                "home=" + ((current.getX() == home.getX() && current.getY() == home.getY()) ? "yes" : "no") +
-                ", current=" + current +
+                "home=" + ((position.getX() == home.getX() && position.getY() == home.getY()) ? "yes" : "no") +
+                ", current=" + position +
                 ", orientation=" + rotation +
                 ", pen=" + pen +
                 '}';
