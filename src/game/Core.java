@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Core {
-    private static Core instance = new Core();
+    private static final Core instance = new Core();
     JdkElf elf = JdkElf.getInstance();
     ArrayList<Command> commands = new ArrayList<Command>();
     ArrayList<Line> draws = new ArrayList<Line>();
@@ -17,19 +17,25 @@ public class Core {
     public static Core getInstance() {
         return instance;
     }
-    public JdkElf getElf()
-    {
+
+    public JdkElf getElf() {
         return elf;
     }
+
     //Minden listával kapcsolatos metodus
-    public void addCommands(Command command){
+    public void addCommands(Command command) {
         commands.add(command);
     }
-    public void addDraws(Line draw){
+
+    public void addDraws(Line draw) {
         draws.add(draw);
     }
-    public void clearDraws(){ draws.clear();}
-    public List<Line> getList(){
+
+    public void clearDraws() {
+        draws.clear();
+    }
+
+    public List<Line> getList() {
         return draws;
     }
 
@@ -37,54 +43,59 @@ public class Core {
         return commands;
     }
 
-    public List<String> getCommandsListString(){
+    public List<String> getCommandsListString() {
         List<String> out = new ArrayList<>();
-        for(Command command : commands) {
+        for (Command command : commands) {
             out.add(command.toString());
         }
         return out;
     }
-    public void undo(){ //Ezen még gondolkozni kell ;)
-        commands.remove(commands.size()-2);
-        commands.remove(commands.size()-1);
+
+    public void undo() { //Ezen még gondolkozni kell ;)
+        commands.remove(commands.size() - 2);
+        commands.remove(commands.size() - 1);
     }
-    public void clear(){
+
+    public void clear() {
         backGroundColor = Color.lightGray;
         setDefault();
         draws.clear();
         commands = new ArrayList<Command>();
 
     }
-    public void clearBackground(){
+
+    public void clearBackground() {
         backGroundColor = Color.lightGray;
     }
 
     // Commands
-    public void doCommands(){
+    public void doCommands() {
         setDefault();
-            for (Command command: commands){
-                command.method(this);
-                System.out.println(elf.toString());
+        for (Command command : commands) {
+            command.method(this);
+            System.out.println(elf.toString());
         }
-            System.out.println();
+        System.out.println();
     }
-    private void setDefault(){
+
+    private void setDefault() {
         elf.setElfDefault();
         draws.clear();
     }
 
-    public String doCommandsString(){
+    public String doCommandsString() {
         String out = "";
         System.out.println(elf.toString());
-        for (int i = 0; i < commands.size(); i++){
+        for (int i = 0; i < commands.size(); i++) {
             commands.get(i).method(this);
             out.concat(elf.toString());
         }
         return out;
     }
-    public void showDrawnObjects(){
-        for(int i = 0; i < draws.size(); i++){
-           System.out.println(draws.get(i).toString());
+
+    public void showDrawnObjects() {
+        for (int i = 0; i < draws.size(); i++) {
+            System.out.println(draws.get(i).toString());
         }
     }
 
@@ -96,7 +107,7 @@ public class Core {
         this.backGroundColor = backGroundColor;
     }
 
-    public void save(String file){
+    public void save(String file) {
         try {
             FileOutputStream f = new FileOutputStream(file);
             ObjectOutputStream out = new ObjectOutputStream(f);
@@ -109,7 +120,8 @@ public class Core {
             e.printStackTrace();
         }
     }
-    public void load(String file){
+
+    public void load(String file) {
         try {
             FileInputStream f = new FileInputStream(file);
             ObjectInputStream in = new ObjectInputStream(f);

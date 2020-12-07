@@ -6,7 +6,7 @@ public class Line extends DrawObject {
 
     private Position endPos;
 
-    public Line(Position startPos, Position endPos, Color color, int thickness ){
+    public Line(Position startPos, Position endPos, Color color, int thickness) {
         this.startPos = startPos;
         this.endPos = endPos;
         this.thickness = thickness;
@@ -14,14 +14,13 @@ public class Line extends DrawObject {
 
     }
 
-    public void setEndPos(Position endPos) {
-        this.endPos = endPos;
-    }
-
     public Position getEndPos() {
         return endPos;
     }
 
+    public void setEndPos(Position endPos) {
+        this.endPos = endPos;
+    }
 
     @Override
     public String toString() {

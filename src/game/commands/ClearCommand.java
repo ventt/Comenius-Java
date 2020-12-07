@@ -1,7 +1,6 @@
 package game.commands;
 
 import game.Core;
-import game.commands.Command;
 
 public class ClearCommand implements Command {
     @Override

@@ -23,10 +23,6 @@ public enum ApplicationColor {
         this.color = color;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     public static ApplicationColor getByColor(Color color) {
         for (ApplicationColor appColor : ApplicationColor.values()) {
             if (appColor.getColor().equals(color)) {
@@ -34,5 +30,9 @@ public enum ApplicationColor {
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

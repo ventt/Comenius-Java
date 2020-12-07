@@ -1,32 +1,39 @@
 package game.commands;
 
-import game.*;
+import game.Core;
+import game.Line;
+import game.Position;
+import game.Rotation;
 
 public class MoveCommand implements Command {
     final private int steps;
-    public MoveCommand(int steps){this.steps = steps;}
 
-    private Position movement(Position current, int steps, Orientation dir){
+    public MoveCommand(int steps) {
+        this.steps = steps;
+    }
+
+    private Position movement(Position current, int steps, Rotation dir) {
         Position newPos = new Position(current.getX(), current.getY());  // !!!
-        switch (dir){
-            case NORTH:
-                newPos.setY(current.getY()+steps);
+        switch (dir) {
+            case FORWARD:
+                newPos.setY(current.getY() + steps);
                 break;
-            case EAST:
-                newPos.setX(current.getX()+steps);
+            case RIGHT:
+                newPos.setX(current.getX() + steps);
                 break;
-            case SOUTH:
-                newPos.setY(current.getY()-steps);
+            case BACKWARD:
+                newPos.setY(current.getY() - steps);
                 break;
-            case WEST:
-                newPos.setX(current.getX()-steps);
+            case LEFT:
+                newPos.setX(current.getX() - steps);
                 break;
             default:
                 break;
         }
         return newPos;
     }
-    private void Move ( int steps, Core core){
+
+    private void Move(int steps, Core core) {
         if (!core.getElf().getPen().isDrawing()) {
             core.getElf().setCurrent(movement(core.getElf().getCurrent(), steps, core.getElf().getOrientation()));
 
@@ -37,16 +44,18 @@ public class MoveCommand implements Command {
             core.addDraws(obj);
         }
     }
+
     public int getSteps() {
         return steps;
     }
+
     @Override
     public void method(Core core) {
-        Move(steps,core);
+        Move(steps, core);
     }
 
     @Override
     public String toString() {
-        return "Move command: elf took "+ steps+" step(s)!";
+        return "Move command: elf took " + steps + " step(s)!";
     }
 }

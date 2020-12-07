@@ -1,8 +1,6 @@
 import controller.WindowController;
 import game.Core;
-import game.Orientation;
-import game.commands.*;
-import view.*;
+import view.WindowView;
 
 public class Application {
 

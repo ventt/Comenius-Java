@@ -1,71 +1,52 @@
 package controller;
 
 import game.Core;
-import game.Orientation;
-import game.color.ColorHelper;
-import game.color.ColorNotFoundException;
-import game.commands.*;
+import game.commands.Command;
+import game.commands.factory.*;
 
 public class CommandTranslator {
-    public void translate(String input) throws ColorNotFoundException {
-        Command command = null;
-        String[] s = input.split(" ");
-        switch (s[0].toLowerCase()) {
-            case "move":
-                command = new MoveCommand(Integer.decode(s[1].toLowerCase()));
-                break;
-            case "color":
-                command = new ColorCommand(ColorHelper.getColorFromString(s[1].toUpperCase()));
-                break;
-            case "pen":
-                if ("down".equals(s[1].toLowerCase())) {
-                    command = new DrawingCommand(true);
-                } else if ("up".equals(s[1].toLowerCase())) {
-                    command = new DrawingCommand(false);
-                } else if ("thickness".equals(s[1].toLowerCase())) {
-                    command = new ThicknessCommand(Integer.decode(s[2]));
-                }
-                break;
-            case "rotate":
-                if ("forward".equals(s[1].toLowerCase()))
-                    command = new RotationCommand(Orientation.NORTH);
-                if ("backward".equals(s[1].toLowerCase()))
-                    command = new RotationCommand(Orientation.SOUTH);
-                if ("right".equals(s[1].toLowerCase()))
-                    command = new RotationCommand(Orientation.EAST);
-                if ("left".equals(s[1].toLowerCase()))
-                    command = new RotationCommand(Orientation.WEST);
-                break;
-            case "undo":
-                if (Core.getInstance().getCommands().size() > 0)
-                    Core.getInstance().getCommands().remove(Core.getInstance().getCommands().size() - 1);
-                break;
-            case "home":
-                command = new HomeCommand();
-                break;
-            case "clear":
-                command = new ClearCommand();
-                break;
-            case "background":
-                if ("default".equals(s[1])) {
-                    Core.getInstance().clearBackground();
-                } else {
-                    command = new BackgroundCommand(ColorHelper.getColorFromString(s[1].toUpperCase()));
-                }
-            case "save":
-                Core.getInstance().save("save.txt");
-                break;
-            case "load":
-                Core.getInstance().load(s[1]);
-                break;
+    private static final CommandFactory[] commandFactories = {
+            new BackgroundCommandFactory(),
+            new ClearCommandFactory(),
+            new ColorCommandFactory(),
+            new DrawingCommandFactory(),
+            new HomeCommandFactory(),
+            new MoveCommandFactory(),
+            new RotateCommandFactory(),
+            new ThicknessCommandFactory(),
+    };
 
-            default:
-                System.out.println("Not a valid command");
-                break;
-
+    private static Command getCommand(String input) throws Exception {
+        for (CommandFactory commandFactory : commandFactories) {
+            Command command = commandFactory.createFromText(input);
+            if (command != null) {
+                return command;
+            }
         }
-        if (command != null)
+        return null;
+    }
+
+    public void translate(String input) throws Exception {
+        Command command = getCommand(input);
+        if (command == null) {
+            String[] s = input.split(" ");
+            switch (s[0].toLowerCase()) {
+                case "undo":
+                    if (Core.getInstance().getCommands().size() > 0)
+                        Core.getInstance().getCommands().remove(Core.getInstance().getCommands().size() - 1);
+                    break;
+                case "save":
+                    Core.getInstance().save("save.txt");
+                    break;
+                case "load":
+                    Core.getInstance().load(s[1]);
+                    break;
+                default:
+                    throw new InvalidCommandException(input);
+            }
+        } else {
             Core.getInstance().addCommands(command);
+        }
         Core.getInstance().doCommands();
     }
 }
