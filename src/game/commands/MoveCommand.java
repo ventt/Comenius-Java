@@ -13,24 +13,18 @@ public class MoveCommand implements Command {
     }
 
     private Position movement(Position current, int steps, Rotation dir) {
-        Position newPos = new Position(current.getX(), current.getY());  // !!!
         switch (dir) {
             case FORWARD:
-                newPos.setY(current.getY() + steps);
-                break;
+                return new Position(current.getX(), current.getY() + steps);
             case RIGHT:
-                newPos.setX(current.getX() + steps);
-                break;
+                return new Position(current.getX() + steps, current.getY());
             case BACKWARD:
-                newPos.setY(current.getY() - steps);
-                break;
+                return new Position(current.getX(), current.getY() - steps);
             case LEFT:
-                newPos.setX(current.getX() - steps);
-                break;
+                return new Position(current.getX() - steps, current.getY());
             default:
-                break;
+                throw new IllegalArgumentException("Wrong direction");
         }
-        return newPos;
     }
 
     private void Move(int steps, Core core) {

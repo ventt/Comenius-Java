@@ -7,30 +7,29 @@ public class DrawObject {
     protected Position startPos;
     protected Color color;
     protected int thickness;
-    // protected LocalTime creationTime;
-
-    public void setStartPos(Position startPos) {
-        this.startPos = startPos;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public void setThickness(int thickness) {
-        this.thickness = thickness;
-    }
 
     public Position getStartPos() {
         return startPos;
+    }
+
+    public void setStartPos(Position startPos) {
+        this.startPos = startPos;
     }
 
     public Color getColor() {
         return color;
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public int getThickness() {
         return thickness;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package view;
 
-import game.*;
+import game.Core;
+import game.Line;
+import game.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,22 +15,17 @@ import java.util.ArrayList;
 public class MyCanvas extends Canvas {
     private int scale = 10;
 
+    public int getScale() {
+        return scale;
+    }
+
     public void setScale(int scale) {
         this.scale = scale;
         repaint();
     }
 
-    public int getScale() {
-        return scale;
-    }
-
-
-
     public Position convertPosition(Position p, int canvasWidth, int canvasHeight) {
-        Position out = new Position();
-        out.setX(scale*p.getX() + canvasWidth / 2);
-        out.setY(canvasHeight / 2 - scale*p.getY());
-        return out;
+        return new Position(scale * p.getX() + canvasWidth / 2, canvasHeight / 2 - scale * p.getY());
     }
 
     @Override
@@ -40,12 +37,11 @@ public class MyCanvas extends Canvas {
         Graphics2D g2 = (Graphics2D) g;
         BufferedImage imgElf = null;
         try {
-            imgElf = ImageIO.read(new File("res","JdkElfImage.png"));
+            imgElf = ImageIO.read(new File("res", "JdkElfImage.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        g2.drawImage(imgElf,convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getX(),convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getY(), this);
-
+        g2.drawImage(imgElf, convertPosition(Core.getInstance().getElf().getCurrent(), this.getWidth(), this.getHeight()).getX(), convertPosition(Core.getInstance().getElf().getCurrent(), this.getWidth(), this.getHeight()).getY(), this);
 
 
         for (Line line : list) {

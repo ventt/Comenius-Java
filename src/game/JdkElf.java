@@ -1,17 +1,12 @@
 package game;
 
 public class JdkElf {
-    private static final JdkElf instance = new JdkElf();
     private final Position home = new Position(0, 0);
+    private final Pen pen = new Pen();
     private Position current = home;
-    private final Pen pen = Pen.getInstance();
     private Rotation rotation = Rotation.FORWARD;
 
-    private JdkElf() {
-    }
-
-    public static JdkElf getInstance() {
-        return instance;
+    JdkElf() {
     }
 
     public Pen getPen() {

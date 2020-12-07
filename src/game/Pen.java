@@ -3,19 +3,12 @@ package game;
 import java.awt.*;
 
 public class Pen {
-    //singleton
-    private static final Pen instance = new Pen();
     private boolean isDrawing = false;
     private Color color = Color.BLACK;
     private int penThickness = 1;
 
-    private Pen() {
+    Pen() {
     }
-
-    public static Pen getInstance() {
-        return instance;
-    }
-
 
     public boolean isDrawing() {
         return isDrawing;
