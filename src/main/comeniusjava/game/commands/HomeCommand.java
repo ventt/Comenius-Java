@@ -6,8 +6,8 @@ import comeniusjava.game.Core;
 public class HomeCommand implements Command {
 
     @Override
-    public void apply(Core core) {
-        core.getElf().setHome();
+    public void apply() {
+        Core.getInstance().getElf().setHome();
     }
 
     @Override

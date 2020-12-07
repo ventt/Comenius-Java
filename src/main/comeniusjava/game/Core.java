@@ -1,79 +1,36 @@
 package comeniusjava.game;
 
-
 import comeniusjava.game.commands.Command;
 import comeniusjava.game.draw.DrawObject;
 
 import java.awt.*;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Core {
-    private static final Core instance = new Core();
-    final ArrayList<Command> commands = new ArrayList<>();
-    final JdkElf elf = new JdkElf();
-    final ArrayList<DrawObject> draws = new ArrayList<>();
-    private Color backGroundColor = Color.lightGray;
-
-    private Core() {
-    }
+public abstract class Core {
+    private static final Core instance = new CoreImpl();
 
     public static Core getInstance() {
         return instance;
     }
 
-    public JdkElf getElf() {
-        return elf;
-    }
+    public abstract JdkElf getElf();
 
-    public ArrayList<Command> getCommands() {
-        return commands;
-    }
+    public abstract ArrayList<Command> getCommands();
 
-    public ArrayList<DrawObject> getDraws() {
-        return draws;
-    }
+    public abstract ArrayList<DrawObject> getDraws();
 
-    public void clear() {
-        backGroundColor = Color.lightGray;
-        setDefault();
-        draws.clear();
-        commands.clear();
-    }
+    public abstract void clear();
 
-    public void doCommands() {
-        setDefault();
-        for (Command command : commands) {
-            command.apply(this);
-            System.out.println(elf.toString());
-        }
-        System.out.println();
-    }
+    public abstract void doCommands();
 
-    private void setDefault() {
-        elf.setElfDefault();
-        draws.clear();
-    }
+    public abstract void setDefault();
 
-    public Color getBackGroundColor() {
-        return backGroundColor;
-    }
+    public abstract Color getBackGroundColor();
 
-    public void setBackGroundColor(Color backGroundColor) {
-        this.backGroundColor = backGroundColor;
-    }
+    public abstract void setBackGroundColor(Color backGroundColor);
 
-    public void save(String file) throws IOException {
-        FileOutputStream f = new FileOutputStream(file);
-        ObjectOutputStream out = new ObjectOutputStream(f);
-        out.writeObject(commands);
-        out.close();
-    }
+    public abstract void save(String file) throws IOException;
 
-    public void load(String file) throws IOException, ClassNotFoundException {
-        FileInputStream f = new FileInputStream(file);
-        ObjectInputStream in = new ObjectInputStream(f);
-        commands.clear();
-        commands.addAll((ArrayList<Command>) in.readObject());
-    }
+    public abstract void load(String file) throws IOException, ClassNotFoundException;
 }

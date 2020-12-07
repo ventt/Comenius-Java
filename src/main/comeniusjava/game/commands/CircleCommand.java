@@ -13,9 +13,9 @@ public class CircleCommand implements Command {
     }
 
     @Override
-    public void apply(Core core) {
+    public void apply() {
         final JdkElf elf = Core.getInstance().getElf();
-        core.getDraws().add(new Circle(elf.getPosition(), radius, elf.getPen().getColor(), elf.getPen().getPenThickness()));
+        Core.getInstance().getDraws().add(new Circle(elf.getPosition(), radius, elf.getPen().getColor(), elf.getPen().getPenThickness()));
     }
 
     @Override

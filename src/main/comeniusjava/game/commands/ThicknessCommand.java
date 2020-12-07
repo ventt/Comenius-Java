@@ -10,13 +10,13 @@ public class ThicknessCommand implements Command {
         this.thickness = thickness;
     }
 
-    private void setThickness(int thickness, Core core) {
-        core.getElf().getPen().setPenThickness(thickness);
+    private void setThickness(int thickness) {
+        Core.getInstance().getElf().getPen().setPenThickness(thickness);
     }
 
     @Override
-    public void apply(Core core) {
-        setThickness(thickness, core);
+    public void apply() {
+        setThickness(thickness);
     }
 
     @Override

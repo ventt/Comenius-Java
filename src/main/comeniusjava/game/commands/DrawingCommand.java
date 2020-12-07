@@ -10,13 +10,13 @@ public class DrawingCommand implements Command {
         this.isDrawing = isDrawing;
     }
 
-    private void rotate(boolean isDrawing, Core core) {
-        core.getElf().getPen().setDrawing(isDrawing);
+    private void rotate(boolean isDrawing) {
+        Core.getInstance().getElf().getPen().setDrawing(isDrawing);
     }
 
     @Override
-    public void apply(Core core) {
-        rotate(isDrawing, core);
+    public void apply() {
+        rotate(isDrawing);
     }
 
     @Override

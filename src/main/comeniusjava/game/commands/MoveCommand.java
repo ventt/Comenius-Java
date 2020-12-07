@@ -28,15 +28,15 @@ public class MoveCommand implements Command {
         }
     }
 
-    private void Move(int steps, Core core) {
-        if (!core.getElf().getPen().isDrawing()) {
-            core.getElf().setPosition(movement(core.getElf().getPosition(), steps, core.getElf().getOrientation()));
+    private void Move(int steps) {
+        if (!Core.getInstance().getElf().getPen().isDrawing()) {
+            Core.getInstance().getElf().setPosition(movement(Core.getInstance().getElf().getPosition(), steps, Core.getInstance().getElf().getOrientation()));
 
         } else {
-            Position newPos = movement(core.getElf().getPosition(), steps, core.getElf().getOrientation());
-            Line obj = new Line(core.getElf().getPosition(), newPos, core.getElf().getPen().getColor(), core.getElf().getPen().getPenThickness()); /// !!!
-            core.getElf().setPosition(newPos);
-            core.getDraws().add(obj);
+            Position newPos = movement(Core.getInstance().getElf().getPosition(), steps, Core.getInstance().getElf().getOrientation());
+            Line obj = new Line(Core.getInstance().getElf().getPosition(), newPos, Core.getInstance().getElf().getPen().getColor(), Core.getInstance().getElf().getPen().getPenThickness()); /// !!!
+            Core.getInstance().getElf().setPosition(newPos);
+            Core.getInstance().getDraws().add(obj);
         }
     }
 
@@ -45,8 +45,8 @@ public class MoveCommand implements Command {
     }
 
     @Override
-    public void apply(Core core) {
-        Move(steps, core);
+    public void apply() {
+        Move(steps);
     }
 
     @Override

@@ -15,13 +15,13 @@ public class RotateCommand implements Command {
         return rotation;
     }
 
-    private void rotate(Rotation rotation, Core core) {
-        core.getElf().setOrientation(rotation);
+    private void rotate(Rotation rotation) {
+        Core.getInstance().getElf().setOrientation(rotation);
     }
 
     @Override
-    public void apply(Core core) {
-        rotate(rotation, core);
+    public void apply() {
+        rotate(rotation);
     }
 
     @Override

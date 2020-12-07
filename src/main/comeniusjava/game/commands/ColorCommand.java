@@ -13,13 +13,13 @@ public class ColorCommand implements Command {
         this.color = color;
     }
 
-    private void setColour(Color color, Core core) {
-        core.getElf().getPen().setColor(color);
+    private void setColor(Color color) {
+        Core.getInstance().getElf().getPen().setColor(color);
     }
 
     @Override
-    public void apply(Core core) {
-        setColour(color, core);
+    public void apply() {
+        setColor(color);
     }
 
     @Override

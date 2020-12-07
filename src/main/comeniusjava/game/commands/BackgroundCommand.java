@@ -14,8 +14,8 @@ public class BackgroundCommand implements Command {
     }
 
     @Override
-    public void apply(Core core) {
-        core.setBackGroundColor(color);
+    public void apply() {
+        Core.getInstance().setBackGroundColor(color);
     }
 
     @Override
