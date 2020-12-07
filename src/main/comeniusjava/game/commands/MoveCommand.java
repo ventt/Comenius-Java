@@ -6,13 +6,30 @@ import comeniusjava.game.Position;
 import comeniusjava.game.Rotation;
 import comeniusjava.game.draw.Line;
 
+/**
+ * Megadott pozicióra mozgatja a JdkElf-et, ha a toll állapota: lent, akkor vonal alakzatot hozz létre, és hozzá adja
+ * a Core-ban tárolt alakzatok, draws listához, Command implementációja. Tárolja a lépések számát.
+ */
 public class MoveCommand implements Command {
     final private int steps;
 
+    /**
+     * Konstruktor.
+     *
+     * @param steps lépéseke száma.
+     */
     public MoveCommand(int steps) {
         this.steps = steps;
     }
 
+    /**
+     * Meghatározza az irányból és a lépések számából a koordináta rendszer pontjait.
+     *
+     * @param current jelenlegi pozició.
+     * @param steps   lépések száma.
+     * @param dir     irány.
+     * @return Új poziciót, nemlétező irány esetén IllegalArgumentException-t.
+     */
     private Position movement(Position current, int steps, Rotation dir) {
         switch (dir) {
             case FORWARD:
@@ -28,6 +45,12 @@ public class MoveCommand implements Command {
         }
     }
 
+    /**
+     * Elmozgatja a JdkElf-et a megadott lépések számával, a JdkElf által megadott irányba, ha lent van a toll
+     * vonal alakzatot hozz létre.
+     *
+     * @param steps lépések
+     */
     private void Move(int steps) {
         if (!Core.getInstance().getElf().getPen().isDrawing()) {
             Core.getInstance().getElf().setPosition(movement(Core.getInstance().getElf().getPosition(), steps, Core.getInstance().getElf().getOrientation()));
@@ -40,10 +63,9 @@ public class MoveCommand implements Command {
         }
     }
 
-    public int getSteps() {
-        return steps;
-    }
-
+    /**
+     * Meghívja a Move() metódust.
+     */
     @Override
     public void apply() {
         Move(steps);
