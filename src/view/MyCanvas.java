@@ -8,7 +8,6 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class MyCanvas extends Canvas {
@@ -34,7 +33,7 @@ public class MyCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-        setBackground(Core.getInstance().getBackGroundColor().getColor());
+        setBackground(Core.getInstance().getBackGroundColor());
         Core core = Core.getInstance();
         ArrayList<game.Line> list;
         list = (ArrayList<Line>) core.getList();
@@ -50,7 +49,7 @@ public class MyCanvas extends Canvas {
 
 
         for (Line line : list) {
-            g2.setColor(line.getColour().getColor()); //egyelőre
+            g2.setColor(line.getColor()); //egyelőre
             g2.setStroke(new BasicStroke(line.getThickness()));
             g2.draw(new Line2D.Double(convertPosition(line.getStartPos(), this.getWidth(), this.getHeight()).getX(),
                     convertPosition(line.getStartPos(), this.getWidth(), this.getHeight()).getY(),

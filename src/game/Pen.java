@@ -1,17 +1,16 @@
 package game;
 
-import model.MyColor;
-
 import java.awt.*;
 
 public class Pen {
     //singleton
     private static final Pen instance = new Pen();
 
-    private Pen() {}
+    private Pen() {
+    }
 
     private boolean isDrawing = false;
-    private MyColor colour = new MyColor(Color.black);
+    private Color color = Color.BLACK;
     private int penThickness = 1;
 
     public static Pen getInstance() {
@@ -27,32 +26,34 @@ public class Pen {
         isDrawing = drawing;
     }
 
-    public void setColour(MyColor colour){
-        this.colour = colour;
+    public void setColor(Color color) {
+        this.color = color;
     }
-    public void setPenThickness(int penThickness){
+
+    public void setPenThickness(int penThickness) {
         this.penThickness = penThickness;
     }
 
-    public MyColor getColour() {
-        return colour;
+    public Color getColor() {
+        return color;
     }
-
 
 
     public int getPenThickness() {
         return penThickness;
     }
-    public void penSetDefault(){
+
+    public void penSetDefault() {
         isDrawing = false;
-        colour = new MyColor(Color.BLACK);
+        color = Color.BLACK;
         penThickness = 1;
     }
+
     @Override
     public String toString() {
         return "Pen{" +
                 "upDown=" + isDrawing +
-                ", colour='" + colour + '\'' +
+                ", colour='" + color + '\'' +
                 ", penThickness=" + penThickness +
                 '}';
     }

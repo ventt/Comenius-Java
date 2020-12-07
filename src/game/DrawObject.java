@@ -1,37 +1,43 @@
 package game;
 
-import model.MyColor;
-
 import java.awt.*;
 
 //ős osztálya minden rajzobjektumnak
 public class DrawObject {
     protected Position startPos;
-    protected MyColor colour;
+    protected Color color;
     protected int thickness;
-   // protected LocalTime creationTime;
+    // protected LocalTime creationTime;
 
     public void setStartPos(Position startPos) {
         this.startPos = startPos;
     }
-    public void setColour(MyColor colour) {
-        this.colour = colour;
+
+    public void setColor(Color color) {
+        this.color = color;
     }
-    public void setThickness(int thickness) { this.thickness = thickness;}
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
+    }
 
     public Position getStartPos() {
         return startPos;
     }
-    public MyColor getColour() {
-        return colour;
+
+    public Color getColor() {
+        return color;
     }
-    public int getThickness() { return thickness;}
+
+    public int getThickness() {
+        return thickness;
+    }
 
     @Override
     public String toString() {
         return "DrawObject{" +
                 "startPos=" + startPos +
-                ", colour='" + colour.getColorString(colour.getColor()) + '\'' +
+                ", colour='" + color.toString() + '\'' +
                 ", thickness=" + thickness +
                 '}';
     }

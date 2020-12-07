@@ -1,6 +1,7 @@
 package controller;
 
 import game.Core;
+import game.color.ColorNotFoundException;
 import view.MyCanvas;
 
 import javax.swing.*;
@@ -13,12 +14,22 @@ public class CommandTextListener implements ActionListener {
     private MyCanvas canvas;
     private CommandTranslator ct = new CommandTranslator();
     private ListController list;
-    public CommandTextListener(TextField t, MyCanvas canvas, ListController list){this.t = t; this.canvas = canvas; this.list = list;}
+
+    public CommandTextListener(TextField t, MyCanvas canvas, ListController list) {
+        this.t = t;
+        this.canvas = canvas;
+        this.list = list;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        ct.translate(t.getText());
-        t.setText("");
-        list.refresh(Core.getInstance().getCommands());
-        canvas.repaint();
+        try {
+            ct.translate(t.getText());
+            t.setText("");
+            list.refresh(Core.getInstance().getCommands());
+            canvas.repaint();
+        } catch (ColorNotFoundException colorNotFoundException) {
+            t.setText(colorNotFoundException.getMessage());
+        }
     }
 }

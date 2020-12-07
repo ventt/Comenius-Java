@@ -1,8 +1,6 @@
 package game;
 
-import game.commands.ClearCommand;
 import game.commands.Command;
-import model.MyColor;
 
 import java.awt.*;
 import java.io.*;
@@ -14,7 +12,7 @@ public class Core {
     JdkElf elf = JdkElf.getInstance();
     ArrayList<Command> commands = new ArrayList<Command>();
     ArrayList<Line> draws = new ArrayList<Line>();
-    private MyColor backGroundColor = new MyColor(Color.lightGray);
+    private Color backGroundColor = Color.lightGray;
 
     public static Core getInstance() {
         return instance;
@@ -51,14 +49,14 @@ public class Core {
         commands.remove(commands.size()-1);
     }
     public void clear(){
-        backGroundColor.setColor("lightgray");
+        backGroundColor = Color.lightGray;
         setDefault();
         draws.clear();
         commands = new ArrayList<Command>();
 
     }
     public void clearBackground(){
-        backGroundColor.setColor("lightgray");
+        backGroundColor = Color.lightGray;
     }
 
     // Commands
@@ -90,14 +88,14 @@ public class Core {
         }
     }
 
-
-    public MyColor getBackGroundColor() {
+    public Color getBackGroundColor() {
         return backGroundColor;
     }
 
-    public void setBackGroundColor(MyColor backGroundColor) {
+    public void setBackGroundColor(Color backGroundColor) {
         this.backGroundColor = backGroundColor;
     }
+
     public void save(String file){
         try {
             FileOutputStream f = new FileOutputStream(file);

@@ -2,44 +2,43 @@ package controller;
 
 import game.Core;
 import game.Orientation;
+import game.color.ColorHelper;
+import game.color.ColorNotFoundException;
 import game.commands.*;
-import model.MyColor;
 
 public class CommandTranslator {
-    public void translate(String input){
+    public void translate(String input) throws ColorNotFoundException {
         Command command = null;
         String[] s = input.split(" ");
-        switch (s[0].toLowerCase()){
+        switch (s[0].toLowerCase()) {
             case "move":
                 command = new MoveCommand(Integer.decode(s[1].toLowerCase()));
                 break;
             case "color":
-                MyColor color = new MyColor();
-                color.setColor(s[1].toLowerCase());
-                command = new ColorCommand(color);
+                command = new ColorCommand(ColorHelper.getColorFromString(s[1].toUpperCase()));
                 break;
             case "pen":
-                if("down".equals(s[1].toLowerCase())){
+                if ("down".equals(s[1].toLowerCase())) {
                     command = new DrawingCommand(true);
-                }else if("up".equals(s[1].toLowerCase())){
+                } else if ("up".equals(s[1].toLowerCase())) {
                     command = new DrawingCommand(false);
-                }else if("thickness".equals(s[1].toLowerCase())){
+                } else if ("thickness".equals(s[1].toLowerCase())) {
                     command = new ThicknessCommand(Integer.decode(s[2]));
                 }
                 break;
-            case"rotate":
-                if("forward".equals(s[1].toLowerCase()))
-                command = new RotationCommand(Orientation.NORTH);
-                if("backward".equals(s[1].toLowerCase()))
-                command = new RotationCommand(Orientation.SOUTH);
-                if("right".equals(s[1].toLowerCase()))
-                command = new RotationCommand(Orientation.EAST);
-                if("left".equals(s[1].toLowerCase()))
-                command = new RotationCommand(Orientation.WEST);
+            case "rotate":
+                if ("forward".equals(s[1].toLowerCase()))
+                    command = new RotationCommand(Orientation.NORTH);
+                if ("backward".equals(s[1].toLowerCase()))
+                    command = new RotationCommand(Orientation.SOUTH);
+                if ("right".equals(s[1].toLowerCase()))
+                    command = new RotationCommand(Orientation.EAST);
+                if ("left".equals(s[1].toLowerCase()))
+                    command = new RotationCommand(Orientation.WEST);
                 break;
             case "undo":
-                if(Core.getInstance().getCommands().size() > 0)
-                    Core.getInstance().getCommands().remove(Core.getInstance().getCommands().size()-1);
+                if (Core.getInstance().getCommands().size() > 0)
+                    Core.getInstance().getCommands().remove(Core.getInstance().getCommands().size() - 1);
                 break;
             case "home":
                 command = new HomeCommand();
@@ -48,12 +47,10 @@ public class CommandTranslator {
                 command = new ClearCommand();
                 break;
             case "background":
-                if("default".equals(s[1])){
+                if ("default".equals(s[1])) {
                     Core.getInstance().clearBackground();
-                }else {
-                    MyColor backColor = new MyColor();
-                    backColor.setColor(s[1].toLowerCase());
-                    command = new backgroundCommand(backColor);
+                } else {
+                    command = new BackgroundCommand(ColorHelper.getColorFromString(s[1].toUpperCase()));
                 }
             case "save":
                 Core.getInstance().save("save.txt");
@@ -62,12 +59,12 @@ public class CommandTranslator {
                 Core.getInstance().load(s[1]);
                 break;
 
-                default:
+            default:
                 System.out.println("Not a valid command");
                 break;
 
         }
-        if(command != null)
+        if (command != null)
             Core.getInstance().addCommands(command);
         Core.getInstance().doCommands();
     }

@@ -1,7 +1,6 @@
 package game.commands;
 
 import game.*;
-import game.commands.Command;
 
 public class MoveCommand implements Command {
     final private int steps;
@@ -33,7 +32,7 @@ public class MoveCommand implements Command {
 
         } else {
             Position newPos = movement(core.getElf().getCurrent(), steps, core.getElf().getOrientation());
-            Line obj = new Line(core.getElf().getCurrent(), newPos, core.getElf().getPen().getColour(), core.getElf().getPen().getPenThickness()); /// !!!
+            Line obj = new Line(core.getElf().getCurrent(), newPos, core.getElf().getPen().getColor(), core.getElf().getPen().getPenThickness()); /// !!!
             core.getElf().setCurrent(newPos);
             core.addDraws(obj);
         }
