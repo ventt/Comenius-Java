@@ -22,7 +22,7 @@ public class JdkElf {
         this.rotation = rotation;
     }
 
-    public Position getCurrent() {
+    public Position getPosition() {
         return current;
     }
 

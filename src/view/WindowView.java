@@ -12,7 +12,7 @@ public class WindowView {
     private JMenuItem save;
     private JMenuItem load;
     private JMenuItem help;
-    private MyCanvas canvas;
+    private final MyCanvas canvas;
     private JComboBox jComboBox;
 
     public TextField getCommmandPrompt() {
@@ -21,7 +21,7 @@ public class WindowView {
 
 
     private TextField commmandPrompt;
-    private JList<Command> commandList;
+    private final JList<Command> commandList;
     private JPanel canvasPanel;
     private TextField scaleText;
     private JPanel rightPanel;
@@ -54,14 +54,6 @@ public class WindowView {
         canvasPanel.add(canvas);
 
         //canvasPanel.add(canvasPanel, BorderLayout.CENTER);
-
-
-
-
-
-
-
-
 
         rightPanel = new JPanel();
         rightPanel.setMinimumSize(new Dimension(600, frame.getHeight()));

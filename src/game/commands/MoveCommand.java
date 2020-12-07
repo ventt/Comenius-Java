@@ -1,9 +1,9 @@
 package game.commands;
 
 import game.Core;
-import game.Line;
 import game.Position;
 import game.Rotation;
+import game.draw.Line;
 
 public class MoveCommand implements Command {
     final private int steps;
@@ -29,13 +29,13 @@ public class MoveCommand implements Command {
 
     private void Move(int steps, Core core) {
         if (!core.getElf().getPen().isDrawing()) {
-            core.getElf().setCurrent(movement(core.getElf().getCurrent(), steps, core.getElf().getOrientation()));
+            core.getElf().setCurrent(movement(core.getElf().getPosition(), steps, core.getElf().getOrientation()));
 
         } else {
-            Position newPos = movement(core.getElf().getCurrent(), steps, core.getElf().getOrientation());
-            Line obj = new Line(core.getElf().getCurrent(), newPos, core.getElf().getPen().getColor(), core.getElf().getPen().getPenThickness()); /// !!!
+            Position newPos = movement(core.getElf().getPosition(), steps, core.getElf().getOrientation());
+            Line obj = new Line(core.getElf().getPosition(), newPos, core.getElf().getPen().getColor(), core.getElf().getPen().getPenThickness()); /// !!!
             core.getElf().setCurrent(newPos);
-            core.addDraws(obj);
+            core.getDraws().add(obj);
         }
     }
 

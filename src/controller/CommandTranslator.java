@@ -7,7 +7,7 @@ import game.commands.factory.*;
 public class CommandTranslator {
     private static final CommandFactory[] commandFactories = {
             new BackgroundCommandFactory(),
-            new ClearCommandFactory(),
+            new CircleCommandFactory(),
             new ColorCommandFactory(),
             new DrawingCommandFactory(),
             new HomeCommandFactory(),
@@ -31,6 +31,8 @@ public class CommandTranslator {
         if (command == null) {
             String[] s = input.split(" ");
             switch (s[0].toLowerCase()) {
+                case "clear":
+                    Core.getInstance().clear();
                 case "undo":
                     if (Core.getInstance().getCommands().size() > 0)
                         Core.getInstance().getCommands().remove(Core.getInstance().getCommands().size() - 1);
@@ -45,7 +47,7 @@ public class CommandTranslator {
                     throw new InvalidCommandException(input);
             }
         } else {
-            Core.getInstance().addCommands(command);
+            Core.getInstance().getCommands().add(command);
         }
         Core.getInstance().doCommands();
     }

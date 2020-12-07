@@ -1,17 +1,17 @@
 package game;
 
 import game.commands.Command;
+import game.draw.DrawObject;
 
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Core {
     private static final Core instance = new Core();
     final ArrayList<Command> commands = new ArrayList<>();
     final JdkElf elf = new JdkElf();
-    final ArrayList<Line> draws = new ArrayList<>();
+    final ArrayList<DrawObject> draws = new ArrayList<>();
     private Color backGroundColor = Color.lightGray;
 
     private Core() {
@@ -25,29 +25,19 @@ public class Core {
         return elf;
     }
 
-    public void addCommands(Command command) {
-        commands.add(command);
-    }
-
-    public void addDraws(Line draw) {
-        draws.add(draw);
-    }
-
-    public List<Line> getList() {
-        return draws;
-    }
-
     public ArrayList<Command> getCommands() {
         return commands;
     }
 
+    public ArrayList<DrawObject> getDraws() {
+        return draws;
+    }
 
     public void clear() {
         backGroundColor = Color.lightGray;
         setDefault();
         draws.clear();
         commands.clear();
-
     }
 
     public void doCommands() {
