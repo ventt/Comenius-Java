@@ -28,7 +28,7 @@ public class MyCanvas extends Canvas {
         repaint();
     }
 
-    public Position convertPosition(Position p, int canvasWidth, int canvasHeight) {
+    public Position ConvertImagePosition(Position p, int canvasWidth, int canvasHeight) {
         return new Position(scale * p.getX() + canvasWidth / 2, canvasHeight / 2 - scale * p.getY());
     }
 
@@ -44,7 +44,7 @@ public class MyCanvas extends Canvas {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        g2.drawImage(imgElf, convertPosition(Core.getInstance().getElf().getPosition(), this.getWidth(), this.getHeight()).getX(), convertPosition(Core.getInstance().getElf().getPosition(), this.getWidth(), this.getHeight()).getY(), this);
+        g2.drawImage(imgElf, ConvertImagePosition(Core.getInstance().getElf().getPosition(), this.getWidth(), this.getHeight()).getX(), ConvertImagePosition(Core.getInstance().getElf().getPosition(), this.getWidth(), this.getHeight()).getY(), this);
 
 
         for (DrawObject draw : core.getDraws()) {

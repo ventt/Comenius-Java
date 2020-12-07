@@ -1,12 +1,15 @@
 package comeniusjava.controller.commands;
 
 
-import comeniusjava.game.color.ColorHelper;
+import comeniusjava.game.color.GameColor;
 import comeniusjava.game.commands.BackgroundCommand;
 
 import java.awt.*;
 
 public class BackgroundCommandFactory implements CommandFactory<BackgroundCommand> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BackgroundCommand createFromText(String input) throws Exception {
         String[] split = input.toLowerCase().split(" ");
@@ -14,7 +17,7 @@ public class BackgroundCommandFactory implements CommandFactory<BackgroundComman
             if ("default".equals(split[1])) {
                 return new BackgroundCommand(Color.lightGray);
             } else {
-                return new BackgroundCommand(ColorHelper.getColorFromString(split[1].toUpperCase()));
+                return new BackgroundCommand(GameColor.getColorFromString(split[1].toUpperCase()));
             }
         }
         return null;

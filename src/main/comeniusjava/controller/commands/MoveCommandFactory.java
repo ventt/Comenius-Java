@@ -4,6 +4,9 @@ package comeniusjava.controller.commands;
 import comeniusjava.game.commands.MoveCommand;
 
 public class MoveCommandFactory implements CommandFactory<MoveCommand> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MoveCommand createFromText(String input) throws Exception {
         String[] split = input.toLowerCase().split(" ");

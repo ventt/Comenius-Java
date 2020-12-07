@@ -4,7 +4,7 @@ package comeniusjava.game.commands;
 import java.io.Serializable;
 
 /**
- * A parancsok Interface-e.
+ * A parancsok Interface-e. Szérializálható.
  */
 public interface Command extends Serializable {
     /**

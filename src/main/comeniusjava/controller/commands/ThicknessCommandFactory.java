@@ -4,6 +4,9 @@ package comeniusjava.controller.commands;
 import comeniusjava.game.commands.ThicknessCommand;
 
 public class ThicknessCommandFactory implements CommandFactory<ThicknessCommand> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ThicknessCommand createFromText(String input) throws Exception {
         String[] split = input.toLowerCase().split(" ");

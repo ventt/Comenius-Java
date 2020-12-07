@@ -2,7 +2,7 @@ package comeniusjava.game.commands;
 
 
 import comeniusjava.game.Core;
-import comeniusjava.game.color.ApplicationColor;
+import comeniusjava.game.color.GameColor;
 
 import java.awt.*;
 
@@ -40,6 +40,6 @@ public class ColorCommand implements Command {
 
     @Override
     public String toString() {
-        return "Color Command: Pen color set: " + ApplicationColor.getByColor(color).name() + "!";
+        return "Color Command: Pen color set: " + GameColor.getByColor(color).name() + "!";
     }
 }

@@ -4,6 +4,9 @@ package comeniusjava.controller.commands;
 import comeniusjava.game.commands.HomeCommand;
 
 public class HomeCommandFactory implements CommandFactory<HomeCommand> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public HomeCommand createFromText(String input) throws Exception {
         String[] split = input.toLowerCase().split(" ");

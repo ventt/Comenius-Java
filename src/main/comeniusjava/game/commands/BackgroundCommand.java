@@ -2,7 +2,7 @@ package comeniusjava.game.commands;
 
 
 import comeniusjava.game.Core;
-import comeniusjava.game.color.ApplicationColor;
+import comeniusjava.game.color.GameColor;
 
 import java.awt.*;
 
@@ -31,6 +31,6 @@ public class BackgroundCommand implements Command {
 
     @Override
     public String toString() {
-        return "Background color: " + ApplicationColor.getByColor(color).name() + "! ";
+        return "Background color: " + GameColor.getByColor(color).name() + "! ";
     }
 }

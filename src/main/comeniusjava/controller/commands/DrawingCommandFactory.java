@@ -4,6 +4,9 @@ package comeniusjava.controller.commands;
 import comeniusjava.game.commands.DrawingCommand;
 
 public class DrawingCommandFactory implements CommandFactory<DrawingCommand> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DrawingCommand createFromText(String input) throws Exception {
         String[] split = input.toLowerCase().split(" ");

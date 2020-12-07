@@ -8,7 +8,6 @@ public class CanvasController {
     public CanvasController(){
         Canvas = new MyCanvas();
     }
-
     public MyCanvas getCanvas() {
         return Canvas;
     }
