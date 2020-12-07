@@ -34,6 +34,7 @@ public class MyCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
+        setBackground(Core.getInstance().getBackGroundColor().getColor());
         Core core = Core.getInstance();
         ArrayList<game.Line> list;
         list = (ArrayList<Line>) core.getList();
@@ -44,9 +45,6 @@ public class MyCanvas extends Canvas {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
         g2.drawImage(imgElf,convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getX(),convertPosition(JdkElf.getInstance().getCurrent(),this.getWidth(),this.getHeight()).getY(), this);
 
 

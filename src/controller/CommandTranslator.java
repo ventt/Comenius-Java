@@ -47,10 +47,25 @@ public class CommandTranslator {
             case "clear":
                 command = new ClearCommand();
                 break;
+            case "background":
+                if("default".equals(s[1])){
+                    Core.getInstance().clearBackground();
+                }else {
+                    MyColor backColor = new MyColor();
+                    backColor.setColor(s[1].toLowerCase());
+                    command = new backgroundCommand(backColor);
+                }
+            case "save":
+                Core.getInstance().save("save.txt");
+                break;
+            case "load":
+                Core.getInstance().load(s[1]);
+                break;
 
                 default:
                 System.out.println("Not a valid command");
                 break;
+
         }
         if(command != null)
             Core.getInstance().addCommands(command);

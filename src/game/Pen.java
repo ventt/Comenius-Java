@@ -2,6 +2,8 @@ package game;
 
 import model.MyColor;
 
+import java.awt.*;
+
 public class Pen {
     //singleton
     private static final Pen instance = new Pen();
@@ -9,7 +11,7 @@ public class Pen {
     private Pen() {}
 
     private boolean isDrawing = false;
-    private MyColor colour = new MyColor();
+    private MyColor colour = new MyColor(Color.black);
     private int penThickness = 1;
 
     public static Pen getInstance() {
@@ -43,7 +45,7 @@ public class Pen {
     }
     public void penSetDefault(){
         isDrawing = false;
-        colour = new MyColor();
+        colour = new MyColor(Color.BLACK);
         penThickness = 1;
     }
     @Override

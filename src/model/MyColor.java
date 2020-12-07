@@ -2,11 +2,13 @@ package model;
 
 import java.awt.*;
 import java.io.InvalidClassException;
+import java.io.Serializable;
 
-public class MyColor{
+public class MyColor implements Serializable {
     private Color color;
-        public MyColor(){
-            color = Color.BLACK;
+        public MyColor(){}
+        public MyColor(Color color){
+            this.color = color;
         }
         public Color getColor(){
             return color;
@@ -54,12 +56,12 @@ public class MyColor{
                     break;
                 default:
                     new InvalidClassException("Invalid color");
-                    color = Color.BLACK;
+                    //color = Color.BLACK;
                     break;
             }
         }
     public String getColorString(Color color) {
-            String out;
+            String out = "error";
         if (Color.BLACK.equals(color)) {
             out = "black";
         } else if (Color.BLUE.equals(color)) {
@@ -86,9 +88,9 @@ public class MyColor{
             out = "red";
         } else if (Color.WHITE.equals(color)) {
             out = "white";
-        } else {
-            throw new IllegalStateException("Unexpected value: " + color);
-        }
+        } /*else {
+            //throw new IllegalStateException("Unexpected value: " + color);
+        }*/
         return out;
     }
 

@@ -2,7 +2,10 @@ package game;
 
 import game.commands.ClearCommand;
 import game.commands.Command;
+import model.MyColor;
 
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,7 @@ public class Core {
     JdkElf elf = JdkElf.getInstance();
     ArrayList<Command> commands = new ArrayList<Command>();
     ArrayList<Line> draws = new ArrayList<Line>();
+    private MyColor backGroundColor = new MyColor(Color.lightGray);
 
     public static Core getInstance() {
         return instance;
@@ -47,10 +51,14 @@ public class Core {
         commands.remove(commands.size()-1);
     }
     public void clear(){
+        backGroundColor.setColor("lightgray");
         setDefault();
         draws.clear();
         commands = new ArrayList<Command>();
 
+    }
+    public void clearBackground(){
+        backGroundColor.setColor("lightgray");
     }
 
     // Commands
@@ -66,6 +74,7 @@ public class Core {
         elf.setElfDefault();
         draws.clear();
     }
+
     public String doCommandsString(){
         String out = "";
         System.out.println(elf.toString());
@@ -82,4 +91,38 @@ public class Core {
     }
 
 
+    public MyColor getBackGroundColor() {
+        return backGroundColor;
+    }
+
+    public void setBackGroundColor(MyColor backGroundColor) {
+        this.backGroundColor = backGroundColor;
+    }
+    public void save(String file){
+        try {
+            FileOutputStream f = new FileOutputStream(file);
+            ObjectOutputStream out = new ObjectOutputStream(f);
+            out.writeObject(commands);
+            //out.writeObject(backGroundColor);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void load(String file){
+        try {
+            FileInputStream f = new FileInputStream(file);
+            ObjectInputStream in = new ObjectInputStream(f);
+            commands = (ArrayList<Command>) in.readObject();
+            //backGroundColor = (MyColor) in.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
