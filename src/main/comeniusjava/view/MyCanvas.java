@@ -71,19 +71,21 @@ public class MyCanvas extends Canvas {
         Point2D c = Core.getInstance().getElf().getPosition().toPoint(this);
 
         // Center
-        g2.setColor(Color.RED);
-        g2.drawLine((int) c.getX(), (int) c.getY(), (int) c.getX(), (int) c.getY());
+        g2.setColor(Core.getInstance().getElf().getPen().getColor());
+        final int radius = Core.getInstance().getElf().getPen().getPenThickness();
+        g2.drawOval((int) c.getX() - radius / 2, (int) c.getY() - radius / 2, radius, radius);
+        g2.fillOval((int) c.getX() - radius / 2, (int) c.getY() - radius / 2, radius, radius);
 
         {
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(c.getX() - 20, c.getY() - 35);
-            affineTransform.rotate(Core.getInstance().getElf().getOrientation().getTheta());
+            //affineTransform.rotate(Core.getInstance().getElf().getOrientation().getTheta());
             affineTransform.scale(0.5, 0.5);
 
             g2.drawImage(elfImg, affineTransform, this);
         }
         {
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(c.getX() - 3, Core.getInstance().getElf().getPen().isDrawing() ? c.getY() - 42 : c.getY() - 50);
-            affineTransform.rotate(Core.getInstance().getElf().getOrientation().getTheta());
+            //affineTransform.rotate(Core.getInstance().getElf().getOrientation().getTheta());
             affineTransform.scale(0.05, 0.05);
             g2.drawImage(pencilImg, affineTransform, this);
         }
