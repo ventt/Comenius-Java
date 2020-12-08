@@ -5,12 +5,14 @@ import comeniusjava.game.Core;
 import comeniusjava.game.commands.Command;
 import comeniusjava.model.CommandListModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -83,16 +85,77 @@ public class WindowView {
 
     private JMenuBar getMenuBar() {
         JMenuBar menubar = new JMenuBar();
+
         JMenu fileMenu = new JMenu("File");
-
-        JMenuItem save = getSaveMenu();
-        fileMenu.add(save);
-
-        JMenuItem load = getLoadMenu();
-        fileMenu.add(load);
-
+        fileMenu.add(getSaveMenu());
+        fileMenu.add(getLoadMenu());
         menubar.add(fileMenu);
+
+        JMenu helpMenu = new JMenu("Help");
+        helpMenu.add(getCommandsMenu());
+        helpMenu.add(getAboutMenu());
+        menubar.add(helpMenu);
+
         return menubar;
+    }
+
+    private JMenuItem getAboutMenu() {
+        JMenuItem aboutMenu = new JMenuItem("About");
+
+        JDialog aboutDialog = new JDialog(frame, "Help / About", true);
+        aboutDialog.setVisible(false);
+
+        try {
+            BufferedImage image = ImageIO.read(ClassLoader.getSystemResource("resource/about.png"));
+            aboutDialog.add(new JLabel(new ImageIcon(image)));
+            aboutDialog.setSize(image.getWidth(), image.getHeight());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        aboutMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                aboutDialog.setVisible(true);
+            }
+        });
+
+        return aboutMenu;
+    }
+
+    private JMenuItem getCommandsMenu() {
+        JMenuItem commandsMenu = new JMenuItem("Commands");
+
+        JDialog commandsDialog = new JDialog(frame, "Help / Commands", false);
+        commandsDialog.setVisible(false);
+
+        JList<String> commandList = new JList<>(new String[]{
+                "Available commands:",
+                "load <file>",
+                "save <file>",
+                "move <steps>",
+                "pen up|down|thickness [brush size]",
+                "rotate forward|right|backward|left",
+                "color <pen color>",
+                "background <background color>",
+                "circle <circle radius>",
+                "home",
+                "undo",
+                "clear"
+        });
+
+        commandsDialog.add(commandList);
+        commandsDialog.setSize(350, 300);
+
+        commandsMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commandsDialog.setVisible(true);
+            }
+        });
+
+        return commandsMenu;
     }
 
     /**
@@ -100,7 +163,7 @@ public class WindowView {
      */
     private JMenuItem getLoadMenu() {
         JMenuItem load = new JMenuItem("Load");
-        JDialog loadDialog = new JDialog(frame, "Load save", true);
+        JDialog loadDialog = new JDialog(frame, "File / Load", true);
 
         loadDialog.setMinimumSize(new Dimension(600, 400));
         loadDialog.setVisible(false);
@@ -152,7 +215,7 @@ public class WindowView {
      */
     private JMenuItem getSaveMenu() {
         JMenuItem save = new JMenuItem("Save");
-        JDialog saveDialog = new JDialog(frame, "Save", true);
+        JDialog saveDialog = new JDialog(frame, "File / Save", true);
 
         saveDialog.setMinimumSize(new Dimension(600, 400));
         saveDialog.setVisible(false);
