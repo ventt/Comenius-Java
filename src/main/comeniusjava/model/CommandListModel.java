@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Jlist modell
+ */
 public class CommandListModel extends AbstractListModel<Command> {
     private final List<Command> commandList;
 

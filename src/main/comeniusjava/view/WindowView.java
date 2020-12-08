@@ -16,12 +16,18 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
 
+/**
+ * Ablak-ért felelős osztály
+ */
 public class WindowView {
     private final MyCanvas canvas;
     private final JList<Command> commandList;
     private TextField commandTextField;
     private JPanel canvasPanel;
     private JFrame frame;
+    /**
+     * Újraméretezés esetén a Canvas-t is újraméretezi/rajozlja
+     */
     public ComponentListener canvasResizeComponentListener = new ComponentListener() {
         @Override
         public void componentResized(ComponentEvent e) {
@@ -42,17 +48,27 @@ public class WindowView {
         }
     };
 
-
+    /**
+     * Konstruktor
+     *
+     * @param canvas
+     * @param commandList
+     */
     public WindowView(MyCanvas canvas, JList<Command> commandList) {
         this.canvas = canvas;
         this.commandList = commandList;
     }
 
+    /**
+     * @return TextField
+     */
     public TextField getCommandTextField() {
         return commandTextField;
     }
 
-
+    /**
+     * Ablak létrehozásáért felelős metódus
+     */
     public void createWindow() {
         frame = new JFrame("Comenius Java");
         frame.setJMenuBar(getMenuBar());
@@ -83,6 +99,11 @@ public class WindowView {
 
     }
 
+    /**
+     * Menubar létrehozásáért felelős metódus
+     *
+     * @return JMenuBar
+     */
     private JMenuBar getMenuBar() {
         JMenuBar menubar = new JMenuBar();
 
@@ -99,6 +120,11 @@ public class WindowView {
         return menubar;
     }
 
+    /**
+     * About ablak létrehozásáért felelős metódus
+     *
+     * @return JMenuItem
+     */
     private JMenuItem getAboutMenu() {
         JMenuItem aboutMenu = new JMenuItem("About");
 
@@ -124,6 +150,11 @@ public class WindowView {
         return aboutMenu;
     }
 
+    /**
+     * CommandMenu létrehozásáért felelős metódus
+     *
+     * @return JMenuItem
+     */
     private JMenuItem getCommandsMenu() {
         JMenuItem commandsMenu = new JMenuItem("Commands");
 
@@ -159,7 +190,8 @@ public class WindowView {
     }
 
     /**
-     * @return
+     * Load menu létrehozásáért felelős metódus
+     * @return JMenuItem
      */
     private JMenuItem getLoadMenu() {
         JMenuItem load = new JMenuItem("Load");
@@ -211,7 +243,8 @@ public class WindowView {
     }
 
     /**
-     * @return
+     * Save menu létrehozásáért felelős metódus
+     * @return JMenuItem
      */
     private JMenuItem getSaveMenu() {
         JMenuItem save = new JMenuItem("Save");

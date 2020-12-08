@@ -5,6 +5,9 @@ import comeniusjava.controller.commands.*;
 import comeniusjava.game.Core;
 import comeniusjava.game.commands.Command;
 
+/**
+ * Parancsfordító
+ */
 public class CommandTranslator {
     private static final CommandFactory[] commandFactories = {
             new BackgroundCommandFactory(),
@@ -17,6 +20,13 @@ public class CommandTranslator {
             new ThicknessCommandFactory(),
     };
 
+    /**
+     * Végig megy a commandFactory-kon, amelyik nem null-al tér vissza azt visszadja
+     *
+     * @param input parancs
+     * @return command || null
+     * @throws Exception
+     */
     private static Command getCommand(String input) throws Exception {
         for (CommandFactory commandFactory : commandFactories) {
             Command command = commandFactory.createFromText(input);
@@ -27,6 +37,12 @@ public class CommandTranslator {
         return null;
     }
 
+    /**
+     * Fordítja a command class nélküli parancsokat
+     *
+     * @param input parancs
+     * @throws Exception
+     */
     public void translate(String input) throws Exception {
         Command command = getCommand(input);
         if (command == null) {

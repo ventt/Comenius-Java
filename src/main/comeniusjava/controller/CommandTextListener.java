@@ -8,12 +8,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Létrehozza a CommandTextListener-t, ActionListener leszármazottja
+ */
 public class CommandTextListener implements ActionListener {
     private final TextField t;
     private final MyCanvas canvas;
     private final CommandTranslator ct = new CommandTranslator();
     private final ListController list;
 
+    /**
+     * Konstruktor
+     *
+     * @param t      textField
+     * @param canvas Canvas
+     * @param list   ListController
+     */
     public CommandTextListener(TextField t, MyCanvas canvas, ListController list) {
         this.t = t;
         this.canvas = canvas;

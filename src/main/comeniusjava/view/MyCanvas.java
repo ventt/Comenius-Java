@@ -15,6 +15,9 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Grafika megjelenítésért felelős osztály, Canvas leszármazottja, nagyítást tartalmaz a szebb megjelenítésért.
+ */
 public class MyCanvas extends Canvas {
     private int scale = 10;
 
@@ -27,7 +30,11 @@ public class MyCanvas extends Canvas {
         repaint();
     }
 
-
+    /**
+     * Canvas ős osztály paint metódusának felül írása
+     *
+     * @param g grafika
+     */
     @Override
     public void paint(Graphics g) {
         setBackground(Core.getInstance().getBackGroundColor());
@@ -64,6 +71,12 @@ public class MyCanvas extends Canvas {
         }
     }
 
+    /**
+     * JdkElf és a Pen kirajzolását és tarnfromálását végrehajtó metódus
+     *
+     * @param g2 Graphics2D
+     * @throws IOException
+     */
     private void drawElf(Graphics2D g2) throws IOException {
         BufferedImage elfImg = ImageIO.read(ClassLoader.getSystemResource("resource/JdkElfImage.png"));
         BufferedImage pencilImg = ImageIO.read(ClassLoader.getSystemResource("resource/pencil.png"));
@@ -78,14 +91,14 @@ public class MyCanvas extends Canvas {
 
         {
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(c.getX() - 20, c.getY() - 35);
-            //affineTransform.rotate(Core.getInstance().getElf().getOrientation().getTheta());
+
             affineTransform.scale(0.5, 0.5);
 
             g2.drawImage(elfImg, affineTransform, this);
         }
         {
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(c.getX() - 3, Core.getInstance().getElf().getPen().isDrawing() ? c.getY() - 42 : c.getY() - 50);
-            //affineTransform.rotate(Core.getInstance().getElf().getOrientation().getTheta());
+
             affineTransform.scale(0.05, 0.05);
             g2.drawImage(pencilImg, affineTransform, this);
         }

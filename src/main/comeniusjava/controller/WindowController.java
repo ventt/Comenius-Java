@@ -5,6 +5,9 @@ import comeniusjava.view.WindowView;
 
 import java.util.List;
 
+/**
+ * Létrehozza és tárolja a Window-t és elementjeit
+ */
 public class WindowController {
 
     private final WindowView windowView;
@@ -12,6 +15,9 @@ public class WindowController {
     private final CommandTextListener commandTextListener;
     private final ListController listController;
 
+    /**
+     * Konstruktor
+     */
     public WindowController() {
         canvasController = new CanvasController();
         listController = new ListController();

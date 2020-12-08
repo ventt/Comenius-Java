@@ -3,10 +3,8 @@ package comeniusjava;
 
 import comeniusjava.controller.WindowController;
 
-import java.io.IOException;
-
 public class Application {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         WindowController windowController = new WindowController();
     }
 }
