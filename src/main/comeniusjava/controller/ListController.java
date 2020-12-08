@@ -43,8 +43,7 @@ public class ListController {
                 }
             });
         } else {
-            CommandListModel commandListModel = new CommandListModel(commands);
-            jList.setModel(commandListModel);
+            jList.setModel(new CommandListModel(commands));
         }
     }
 
