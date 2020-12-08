@@ -3,6 +3,8 @@ package comeniusjava.controller;
 
 import comeniusjava.view.WindowView;
 
+import java.util.List;
+
 public class WindowController {
 
     private final WindowView windowView;
@@ -16,9 +18,10 @@ public class WindowController {
         windowView = new WindowView(canvasController.getCanvas(), listController.getjList());
         windowView.createWindow();
 
-        commandTextListener = new CommandTextListener(windowView.getCommmandPrompt(), canvasController.getCanvas(), listController);
-        windowView.getCommmandPrompt().addActionListener(commandTextListener);
+        commandTextListener = new CommandTextListener(windowView.getCommandTextField(), canvasController.getCanvas(), listController);
+        windowView.getCommandTextField().addActionListener(commandTextListener);
 
+        listController.refresh(List.of());
     }
 
 }

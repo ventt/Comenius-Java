@@ -10,18 +10,42 @@ import java.util.List;
 public class ListController {
     private final JList<Command> jList;
 
+    public ListController() {
+        jList = new JList<>();
+    }
 
     public JList<Command> getjList() {
         return jList;
     }
 
-    public ListController() {
-        jList = new JList<>();
-    }
-
     void refresh(List<Command> commands) {
-        CommandListModel commandListModel = new CommandListModel(commands);
-        jList.setModel(commandListModel);
+        if (commands.size() == 0) {
+            jList.setModel(new AbstractListModel<>() {
+                @Override
+                public int getSize() {
+                    return 1;
+                }
+
+                @Override
+                public Command getElementAt(int index) {
+                    return new Command() {
+
+                        @Override
+                        public void apply() {
+
+                        }
+
+                        @Override
+                        public String toString() {
+                            return "";
+                        }
+                    };
+                }
+            });
+        } else {
+            CommandListModel commandListModel = new CommandListModel(commands);
+            jList.setModel(commandListModel);
+        }
     }
 
 }

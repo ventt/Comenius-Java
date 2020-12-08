@@ -5,76 +5,85 @@ import comeniusjava.game.commands.Command;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 public class WindowView {
-    private JFrame frame;
-    private JMenuBar menubar;
-    private JMenu fileMenu;
-    private JMenuItem save;
-    private JMenuItem load;
-    private JMenuItem help;
     private final MyCanvas canvas;
-    private JComboBox jComboBox;
-
-    public TextField getCommmandPrompt() {
-        return commmandPrompt;
-    }
-
-
-    private TextField commmandPrompt;
     private final JList<Command> commandList;
+    private TextField commandTextField;
     private JPanel canvasPanel;
-    private TextField scaleText;
-    private JPanel rightPanel;
-    private JScrollPane canvasPanelScroll;
-    public WindowView(MyCanvas canvas, JList<Command> commandList){
+    private JFrame frame;
+    public ComponentListener canvasResizeComponentListener = new ComponentListener() {
+        @Override
+        public void componentResized(ComponentEvent e) {
+            canvas.setSize(canvasPanel.getSize());
+            frame.repaint();
+        }
+
+        @Override
+        public void componentMoved(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentShown(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentHidden(ComponentEvent e) {
+        }
+    };
+
+
+    public WindowView(MyCanvas canvas, JList<Command> commandList) {
         this.canvas = canvas;
         this.commandList = commandList;
     }
 
-    public void createWindow(){
-        frame =  new JFrame("Comenius Java");
-        menubar = new JMenuBar();
-        fileMenu = new JMenu("File");
-        save = new JMenuItem("Save");
-        load = new JMenuItem("Load");
-        fileMenu.add(save);
-        fileMenu.add(load);
-        menubar.add(fileMenu);
+    public TextField getCommandTextField() {
+        return commandTextField;
+    }
 
-        commmandPrompt = new TextField("Várom parancsait!");
-        frame.setJMenuBar(menubar);
-        canvasPanelScroll = new JScrollPane();
+
+    public void createWindow() {
+        frame = new JFrame("Comenius Java");
+        frame.setJMenuBar(getMenuBar());
+        frame.setLayout(new BorderLayout());
+        frame.setMinimumSize(new Dimension(800, 600));
+
+        // Canvas CENTER
         canvasPanel = new JPanel();
-
-
-        canvasPanel.setSize(new Dimension(1600,920));
-        canvasPanel.setMinimumSize(new Dimension(800,800));
-        //canvasPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK,2,true));
-        //canvasPanel.setAutoscrolls(true);
-        canvas.setSize(canvasPanel.getSize());
         canvasPanel.add(canvas);
+        frame.getContentPane().add(canvasPanel, BorderLayout.CENTER);
+        canvasPanel.addComponentListener(canvasResizeComponentListener);
 
-        //canvasPanel.add(canvasPanel, BorderLayout.CENTER);
+        // Right panel LINE_END
+        commandList.setFixedCellWidth(200);
+        frame.getContentPane().add(commandList, BorderLayout.LINE_END);
 
-        rightPanel = new JPanel();
-        rightPanel.setMinimumSize(new Dimension(600, frame.getHeight()));
-        commandList.setMinimumSize(rightPanel.getMinimumSize());
-        rightPanel.add(commandList,BorderLayout.CENTER);
+        // Command Text Field PAGE_END
+        commandTextField = new TextField("Várom parancsait!");
+        frame.getContentPane().add(commandTextField, BorderLayout.PAGE_END);
 
-
-        frame.add(canvasPanel, BorderLayout.WEST);
-        frame.add(rightPanel, BorderLayout.EAST);
-
-        frame.add(commmandPrompt, BorderLayout.SOUTH);
-        frame.setPreferredSize(new Dimension(1920,1080));
+        frame.addComponentListener(canvasResizeComponentListener);
         frame.pack();
-
+        canvas.setSize(canvasPanel.getSize());
 
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+    }
+
+    private JMenuBar getMenuBar() {
+        JMenuBar menubar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem save = new JMenuItem("Save");
+        JMenuItem load = new JMenuItem("Load");
+        fileMenu.add(save);
+        fileMenu.add(load);
+        menubar.add(fileMenu);
+        return menubar;
     }
 
 
